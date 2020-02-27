@@ -20,23 +20,19 @@
             <td>Graphics</td>
         </tr>
     </table>
-
-    <table>
-        <tr>
-            <td>
-                <a href="all_customers/index">View Customers</a>        
-            </td>
-            <td>
-
-            </td>
-        </tr>
-    </table>
 <hr>
-
-    Admin <%= user.username%>
-
-        Name:<%= user.username %>    <br>
-        Id: <%= user.id %> <br>
-        Password: <%= user.password %>
+<table>
+<% for(var i=0; i < customerlsit.length; i++){ %>
+    <tr>
+        <td><%= customerlsit[i].id %></td>
+        <td><%= customerlsit[i].username %></td>
+        <td><%= customerlist[i].password %></td>
+        <!-- <td>
+            <a href="/home/edit/<%= customerlist[i].id %>">EDIT</a> | 
+            <a href="/home/delete/<%= customerlist[i].id %>">DELETE</a>  
+        </td> -->
+    </tr>
+    <% } %>
+</table>
 </body>
 </html>

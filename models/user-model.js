@@ -4,8 +4,10 @@ module.exports ={
 	showCustomer: function(id, callback){
 		var sql = "select * form customer";
 		db.getResult(sql,[id], function(result){
-			if{
-				
+			if(result.length > 0){
+				callback(result);
+			}else{
+				callback(null);
 			}
 		})
 	},
