@@ -4,8 +4,10 @@ var ejs = require('ejs');
 var exSession = require('express-session');
 var cookieParser = require('cookie-parser');
 var alogin = require('./controllers/alogin');
-//var areg =  require('./controllers/areg')
-
+var areg =  require('./controllers/areg')
+var clogin = require('./controllers/clogin');
+var cvHome = require('./controllers/cvHome');
+var cReg = require('./controllers/cReg');
 
 var app = express();
 
@@ -19,8 +21,10 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(exSession({secret:'my top secret value', saveUninitialized: true, resave: false}));
 app.use(cookieParser());
 app.use('/alogin',alogin);
-//app.use('/areg',areg);
-//app.use('/clogin',clogin);
+app.use('/areg',areg);
+app.use('/clogin',clogin);
+app.use('/cvHome', cvHome);
+app.use('/cReg',cReg);
 
 
 

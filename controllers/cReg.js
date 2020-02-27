@@ -17,9 +17,9 @@ router.post('/', function(req, res){
     userModel.insert(user, function(status){
         if(status){
             res.cookie('username', req.body.uname);
-            res.redirect('/adminLogin');
+            res.redirect('/customerLogin');
         }else{
-            res.redirect('/adminReg');
+            res.redirect('/customerReg');
         }
     });
 });

@@ -4,7 +4,7 @@ var userModel	= require.main.require('./models/user-model');
 
 router.get('/', function(req, res){
 	console.log('login page requested!');
-	res.render('adminReg/index');
+	res.render('customerLogin/index');
 });
 
 router.post('/', function(req, res){
@@ -14,12 +14,12 @@ router.post('/', function(req, res){
         password: req.body.password
     };
 
-    userModel.insert(user, function(status){
+    userModel.validate(user, function(status){
         if(status){
             res.cookie('username', req.body.uname);
-            res.redirect('/adminLogin');
+            res.redirect('/cvHome');
         }else{
-            res.redirect('/adminReg');
+            res.redirect('/customerLogin');
         }
     });
 });
