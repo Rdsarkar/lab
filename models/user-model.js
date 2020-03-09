@@ -1,85 +1,79 @@
 var db = require('./db');
 
 module.exports ={
-	showCustomer: function(id, callback){
-		var sql = "select * form customer";
-		db.getResult(sql,[id], function(result){
-			if(result.length > 0){
-				callback(result);
+	ainsert: function(admin,callback){ 
+		var sql= "insert into admin values (?,?,?)";
+		db.execute(sql, [null,admin.aname,admin.password],function(status){
+			if(status){
+				// console.log("Usermodel ok");
+				callback(true);
+			}
+			else{
+				// console.log("usermodel is not")
+				callback(false);
+			}
+		})
+
+	},
+
+
+	avalidate: function(admin,callback){
+
+        var sql = "select * from admin where aname=? and password=?";
+            db.getResults(sql, [admin.aname, admin.password], function(results){
+                if(results.length > 0){
+					console.log("admin validate Working");
+                    callback(true);
+                }
+                else{
+					console.log("admin validate not working!!");
+					callback(false);
+                }
+            });
+
+	},
+	
+	customerInsert: function(customer,callback){
+
+		var sql = "insert into customer values (?,?,?,?)";
+		db.execute(sql,[null, customer.cname, customer.password, customer.contact],function(status){
+			if(status){
+				// console.log("Usermodel ok");
+				callback(true);	
 			}else{
-				callback(null);
+				// console.log("usermodel is not");
+				callback(false);
 			}
 		})
 	},
 
-	getById: function(id, callback){
-		var sql = "select * from customer where id=?";
-		db.getResult(sql, [id], function(result){
-			if(result.length > 0){
-				callback(result[0]);
-			}else{
-				callback(null);
-			}
-		});
+
+	cvalidate: function(customer,callback){
+
+        var sql = "select * from customer where cname=? and password=?";
+            db.getResults(sql, [customer.cname, customer.password], function(results){
+                if(results.length > 0){
+					console.log("customer validate Working");
+                    callback(true);
+                }
+                else{
+					console.log("customer validate not working!!");
+					callback(false);
+                }
+            });
+
 	},
-	getByUname: function(uname, callback){
-		var sql = "select * from user where username=?";
-		db.getResult(sql, [uname], function(result){
-			if(result.length > 0){
-				callback(result[0]);
-			}else{
-				callback(null);
-			}
-		});
-	},
-	validate: function(user, callback){
-		var sql = "select * from user where username=? and password=?";
-		db.getResult(sql, [user.username, user.password], function(result){
-			if(result.length > 0){
-				callback(true);
-			}else{
-				callback(false);
-			}
-		});
-	},
-	getAll:function(callback){
-		var sql = "select * from user";
-		db.getResult(sql, null, function(results){
+
+	allcustomers: function(callback){
+		var sql = "select * from customer";
+		db.getResults(sql,null,function(results){
 			if(results.length > 0){
 				callback(results);
 			}else{
-				callback(null);
+				callback([]);
 			}
-		});
-	},
-	insert: function(user, callback){
-		var sql = "insert into user values(?,?,?,?)";
-		db.execute(sql, [null, user.username, user.password, user.type], function(status){
-			if(status){
-				callback(true);
-			}else{
-				callback(false);
-			}
-		});
-	},
-	delete: function(id, callback){
-		var sql = "delete from user where id=?";
-		db.execute(sql, [id], function(status){
-			if(status){
-				callback(true);
-			}else{
-				callback(false);
-			}
-		});
-	},
-	update: function(user, callback){
-		var sql = "update user set username=?, password=?, type=? where id=?";
-		db.execute(sql, [user.username, user.password, user.type, user.id], function(status){
-			if(status){
-				callback(true);
-			}else{
-				callback(false);
-			}
-		});
+		})
 	}
+
+
 }
