@@ -21,22 +21,43 @@
         </tr>
     </table>
 
-    <table>
-        <tr>
-            <td>
-                <a href="all_customers/index">View Customers</a>        
-            </td>
-            <td>
 
-            </td>
-        </tr>
-    </table>
+<h2>            View Customers         </h2>
+    
+    
+            
 <hr>
 
-    Admin <%= user.username%>
+<table border="2px" style="border-color: coral;">
+    <thead>
+      <tr>
+        <th>Customer ID</th>
+        <th>Customer Name</th>
+        <th>Password</th>
+        <th>Contact</th>
+      </tr>
+    </thead>
 
-        Name:<%= user.username %>    <br>
-        Id: <%= user.id %> <br>
-        Password: <%= user.password %>
+  
+    <tbody>
+        <% for(var i=0; i < results.length; i++){%>
+      <tr>
+        
+
+            <td> <%=results[i].id%></td>
+            <td> <%=results[i].cname%></td>
+            <td> <%=results[i].password%></td>
+            <td> <%=results[i].contact%></td>
+           
+
+      </tr>
+      <% }%>
+    </tbody>
+    
+  </table>
+<br><br>
+  <a href="/creg">Go back</a>
+  <br><br><br>
+  <a href="/alogout">Admin Logout</a>
 </body>
 </html>

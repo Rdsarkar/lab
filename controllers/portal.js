@@ -10,7 +10,7 @@ router.get('*', function(req, res, next){
 	}
 });
 
-router.get('/portal', function(req, res){	
+router.get('/', function(req, res){	
 	
 		userModel.allcustomers(function(results){
 			res.render('adminHome/index', ({results: results}));

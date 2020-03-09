@@ -4,22 +4,27 @@ var userModel	= require.main.require('./models/user-model');
 
 router.get('/', function(req, res){
 	console.log('login page requested!');
-	res.render('adminReg/index');
+	res.render('adminReg/adminReg.ejs');
 });
 
 router.post('/', function(req, res){
 		
-    var user ={
-        username: req.body.uname,
+    var admin ={
+
+        aname: req.body.aname,
         password: req.body.password
+
     };
 
-    userModel.insert(user, function(status){
+    userModel.ainsert(admin, function(status){
         if(status){
-            res.cookie('username', req.body.uname);
-            res.redirect('/adminLogin');
+
+            res.redirect('/alogin');
+
         }else{
-            res.redirect('/adminReg');
+
+            res.render('adminReg/adminReg.ejs');
+
         }
     });
 });

@@ -3,23 +3,23 @@ var router 		= express.Router();
 var userModel	= require.main.require('./models/user-model');
 
 router.get('/', function(req, res){
-	console.log('login page requested!');
+	console.log('Customer login page requested!');
 	res.render('customerLogin/index');
 });
 
 router.post('/', function(req, res){
 		
-    var user ={
-        username: req.body.uname,
+    var customer ={
+        cname: req.body.cname,
         password: req.body.password
     };
 
-    userModel.validate(user, function(status){
+    userModel.cvalidate(customer, function(status){
         if(status){
-            res.cookie('username', req.body.uname);
-            res.redirect('/cvHome');
+            res.cookie('cname', req.body.cname);
+            res.redirect('/cHome');
         }else{
-            res.redirect('/customerLogin');
+            res.redirect('/clogin');
         }
     });
 });

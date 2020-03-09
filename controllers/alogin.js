@@ -3,23 +3,23 @@ var router 		= express.Router();
 var userModel	= require.main.require('./models/user-model');
 
 router.get('/', function(req, res){
-	console.log('login page requested!');
+	console.log('admin login page requested!');
 	res.render('adminLogin/index');
 });
 
 router.post('/', function(req, res){
 		
-    var user ={
-        username: req.body.uname,
+    var admin ={
+        aname: req.body.aname,
         password: req.body.password
     };
 
-    userModel.validate(user, function(status){
-        if(status){
-            res.cookie('username', req.body.uname);
-            res.redirect('/home');
+    userModel.avalidate(admin, function(results){
+        if(results){
+            res.cookie('aname', req.body.aname);
+            res.redirect('/cReg');
         }else{
-            res.redirect('/login');
+            res.redirect('/alogin');
         }
     });
 });
